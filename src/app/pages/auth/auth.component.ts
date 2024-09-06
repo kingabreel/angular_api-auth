@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Login, Register } from '../../models/auth';
+import { Login } from '../../models/auth';
 
 @Component({
   selector: 'app-auth',
@@ -17,18 +17,10 @@ import { Login, Register } from '../../models/auth';
   styleUrl: './auth.component.css'
 })
 export class AuthComponent {
-  isLoginMode: boolean = false;
 
   login: Login = {
     email: "",
     password: ""
-  }
-
-  register: Register = {
-    name: "",
-    email: "",
-    password: "",
-    age: 0
   }
 
   confirmPassword: string = '';
@@ -39,27 +31,16 @@ export class AuthComponent {
 
   }
 
-  onSwitchMode() {
-    this.isLoginMode = !this.isLoginMode;
-  }
-
   onSubmit() {
-    if (this.isLoginMode) {
-      this.authService.login(this.login).subscribe({
-        next: (res:any)=> {
-            console.log(res)
-            localStorage.setItem("token", res.token)
-            this.router.navigateByUrl('')  
-        },
-        error: () => alert("Senha ou usuário inválidos")
-      });
-    } else {
-      this.authService.register(this.register).subscribe({
-        next: (res:any) => {
-          alert("Successfully registered")
-          this.isLoginMode = true;
-        }
-      })
-    }
+    this.authService.login(this.login).subscribe({
+      next: (res:any)=> {
+          localStorage.setItem("token", res.token)
+          this.router.navigateByUrl('/dashboard')  
+      },
+      error: () => {
+        alert("Invalid user or password")
+        this.login.password = '';
+      }
+    });
   }
 }

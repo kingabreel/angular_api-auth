@@ -1,0 +1,25 @@
+<button class="fixed-btn" (click)="registerPage()">Register</button>
+<button class="fixed-btn-return" (click)="toDashboard()">Return</button>
+
+<div class="container">
+    <h2>List of {{role}}</h2>
+  
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Mail</th>
+          <th>Age</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.age }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>

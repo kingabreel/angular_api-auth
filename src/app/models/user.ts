@@ -6,3 +6,10 @@ export interface User{
     "role": string,
     "avatar": string
   }
+
+
+export interface UserToken {
+  "email": string,
+  "roles": string
+  "exp": number
+}

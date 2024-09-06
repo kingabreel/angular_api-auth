@@ -24,4 +24,11 @@ export class AuthService {
     return this.httpClient.get<User>(this.url+"profile")
   }
 
+  registerDoctor(register:Register): Observable<any> {
+    return this.httpClient.post<Register>(this.url+"/register/doctor", register);
+  }
+
+  registerReceptionist(register:Register): Observable<any> {
+    return this.httpClient.post<Register>(this.url+"/register/receptionist", register);
+  }
 }
